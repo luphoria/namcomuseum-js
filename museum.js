@@ -25,16 +25,18 @@ function render() {
     document.onkeydown = function(k) {
         switch (k.code) {
             case "KeyA": // left
-                camera.position.x -= 0.4
+                camera.rotation.y += 0.01
                 break
             case "KeyW": // up
-                camera.position.z -= 0.4
+                camera.position.x -= 0.0 + (camera.rotation.y)
+                camera.position.z -= 0.7 - (camera.rotation.y)
                 break
             case "KeyD": // right
-                camera.position.x += 0.4
+                camera.rotation.y -= 0.01
                 break
             case "KeyS": // down
-                camera.position.z += 0.4
+                camera.position.x += 0.0 + (camera.rotation.y)
+                camera.position.z += 0.7 - (camera.rotation.y)
                 break
             default: break
         }
