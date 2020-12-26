@@ -27,27 +27,27 @@ function render() {
     document.onkeydown = function(k) {
         switch (k.code) { // TODO fix negative position camera rotation movement
             case "KeyA": // left
-                camera.rotation.y += 0.03
+                camera.rotation.y += 0.1
                 if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
                 break
             case "KeyW": // up
                 camera.position.x -= 0.0 + (camera.rotation.y)
-                camera.position.z -= 0.7 - (camera.rotation.y)
+                camera.position.z -= 1 - (camera.rotation.y)
                 if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
                     camera.position.x += 0.0 + (camera.rotation.y)
-                    camera.position.z += 0.7 - (camera.rotation.y)
+                    camera.position.z += 1 - (camera.rotation.y)
                 }
                 break
             case "KeyD": // right
-                camera.rotation.y -= 0.03
+                camera.rotation.y -= 0.1
                 if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
                 break
             case "KeyS": // down
                 camera.position.x += 0.0 + (camera.rotation.y)
-                camera.position.z += 0.7 - (camera.rotation.y)
+                camera.position.z += 1 - (camera.rotation.y)
                 if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
                     camera.position.x -= 0.0 + (camera.rotation.y)
-                    camera.position.z -= 0.7 - (camera.rotation.y)
+                    camera.position.z -= 1 - (camera.rotation.y)
                 }
                 break
             default: break
