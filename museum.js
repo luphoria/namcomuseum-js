@@ -1,7 +1,7 @@
 import "./lib/three.min.js" 
 
-var WIDTH = window.innerWidth // TODO cap these to the original PS1 resolutions
-var HEIGHT = window.innerHeight
+var WIDTH = 600 // TODO cap these to the original PS1 resolutions
+var HEIGHT = 448
 
 var rd = new THREE.WebGLRenderer({antialias:true}) // creates webgl rendering area
 rd.setSize(WIDTH,HEIGHT) // configs area..
