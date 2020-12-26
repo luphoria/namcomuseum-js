@@ -25,15 +25,18 @@ function render() {
     if(debugCube.position.y > +20) mvmtModifier = -1
     debugCube.position.y += mvmtModifier
     document.onkeydown = function(k) {
-        switch (k.code) { // TODO make collisions work
+        switch (k.code) { // TODO fix negative position camera rotation movement
             case "KeyA": // left
                 camera.rotation.y += 0.03
                 if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
                 break
             case "KeyW": // up
-                if(camera.position.x - camera.rotation.y <= debugCubeCollision[0] && camera.position.x - camera.rotation.y >= debugCubeCollision[3] || camera.position.z - 0.7 - camera.rotation.y <= debugCubeCollision[2] && camera.rotation.z - 0.7 - camera.rotation.y >= debugCubeCollision[4]) console.log("collision")
                 camera.position.x -= 0.0 + (camera.rotation.y)
                 camera.position.z -= 0.7 - (camera.rotation.y)
+                if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+                    camera.position.x += 0.0 + (camera.rotation.y)
+                    camera.position.z += 0.7 - (camera.rotation.y)
+                }
                 break
             case "KeyD": // right
                 camera.rotation.y -= 0.03
@@ -42,6 +45,10 @@ function render() {
             case "KeyS": // down
                 camera.position.x += 0.0 + (camera.rotation.y)
                 camera.position.z += 0.7 - (camera.rotation.y)
+                if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+                    camera.position.x -= 0.0 + (camera.rotation.y)
+                    camera.position.z -= 0.7 - (camera.rotation.y)
+                }
                 break
             default: break
         }
