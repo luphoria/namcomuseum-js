@@ -37,6 +37,7 @@ function render() {
                     camera.position.x += 0.0 + (camera.rotation.y)
                     camera.position.z += 1 - (camera.rotation.y)
                 }
+                console.log("UP debug modifier " + camera.rotation.y)
                 break
             case "KeyD": // right
                 camera.rotation.y -= 0.1
@@ -49,6 +50,7 @@ function render() {
                     camera.position.x -= 0.0 + (camera.rotation.y)
                     camera.position.z -= 1 - (camera.rotation.y)
                 }
+                console.log("UP debug modifier " + camera.rotation.y)
                 break
             default: break
         }
