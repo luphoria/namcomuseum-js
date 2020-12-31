@@ -29,7 +29,7 @@ function render() {
     camera.position.x = player.position.x
     camera.position.y = player.position.y
     camera.position.z = player.position.z
-    camera.rotation.y = player.rotation.x
+    // Note the omission of .x rotation
     camera.rotation.y = player.rotation.y
     camera.rotation.z = player.rotation.z
     rd.render(scene,camera)
