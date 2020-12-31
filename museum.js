@@ -1,5 +1,6 @@
 import { OBJLoader2} from "./lib/OBJLoader2.js"
 import * as THREE from "./lib/three.module.js"
+import "./lib/keydrown.min.js"
 
 var WIDTH = 320
 var HEIGHT = 224
