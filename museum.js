@@ -19,48 +19,14 @@ scene.add(camera)
 
 console.error("fuck"); console.error("somebody opened the console"); console.error("shit"); console.error("what do i do now"); console.warn("Please do be careful, the console can be used to steal your data! It may also make the game react in odd ways.\n\nNot as much as you may expect can be done here, due to everything being obfuscated on runtime. Hate to get your hopes down.")
 
-var mvmtModifier = -0.5
+// var mvmtModifier = -0.5
 
 /* define functions */
 function render() {
     requestAnimationFrame(render)
-    if(debugCube.position.y < -20) mvmtModifier = +0.5
+    /*if(debugCube.position.y < -20) mvmtModifier = +0.5
     if(debugCube.position.y > +20) mvmtModifier = -0.5
-    debugCube.position.y += mvmtModifier
-    if(camera.rotation.x < 0) camera.rotation.x = 0
-    document.onkeydown = function(k) {
-        if(k.code != "KeyE") camera.rotation.x -= 0.05
-        switch (k.code) {
-            case "KeyA": // left
-                camera.rotation.y += 0.2
-                if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
-                else if(Math.round(camera.rotation.y) == 3) 
-                break
-            case "KeyW": // up
-                camera.getWorldDirection(dir)
-                camera.position.addScaledVector(dir,1)
-                if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
-                    camera.position.addScaledVector(dir,-1)
-                }
-                break
-            case "KeyD": // right
-                camera.rotation.y -= 0.2
-                if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
-                break
-            case "KeyS": // down
-                camera.getWorldDirection(dir)
-                camera.position.addScaledVector(dir,-1)
-                if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
-                    camera.position.addScaledVector(dir,1)
-                }
-                break
-            case "KeyE": // triangle/look up
-                camera.rotation.x += 0.05
-                if(camera.rotation.x > 0.6) camera.rotation.x = 0.6
-                break
-            default: break
-        }
-    }
+    debugCube.position.y += mvmtModifier*/
     rd.render(scene,camera)
 }
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
@@ -81,6 +47,42 @@ light.position.set(30, 30, 30)
 light2.position.set(-30,-30,-30)
 
 scene.add(light)
+
+document.onkeydown = function(k) {
+    if(k.code != "KeyE") camera.rotation.x -= 0.05
+    if(camera.rotation.x < 0) camera.rotation.x = 0
+    switch (k.code) {
+        case "KeyA": // left
+            camera.rotation.y += 0.2
+            if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
+            else if(Math.round(camera.rotation.y) == 3) 
+            break
+        case "KeyW": // up
+            camera.getWorldDirection(dir)
+            camera.position.addScaledVector(dir,1)
+            if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+                camera.position.addScaledVector(dir,-1)
+            }
+            break
+        case "KeyD": // right
+            camera.rotation.y -= 0.2
+            if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
+            break
+        case "KeyS": // down
+            camera.getWorldDirection(dir)
+            camera.position.addScaledVector(dir,-1)
+            if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+                camera.position.addScaledVector(dir,1)
+            }
+            break
+        case "KeyE": // triangle/look up
+            if(camera.position.x >= 0) camera.rotation.x += 0.05
+            if(camera.rotation.x > 0.6) camera.rotation.x = 0.6
+            break
+        default: break
+    }
+}
+
 /*
 // TUTORIAL IN RENDERING OBJECTS //
 var dodecahedronGeometry = new THREE.DodecahedronGeometry(14)
