@@ -62,8 +62,8 @@ var col = [debugCubeCollision,"&"/*,debugCube2Collision*/]
 
 const loader = new OBJLoader2()
 loader.load(
-    "./assets/obj/1_opt.obj",
-    function(object) {scene.add(object);object.position.y -= 40;/*object.scale.set(0.4,0.4,0.4)*/},
+    "./assets/obj/1/OPT.obj",
+    function(object) {scene.add(object);object.position.y -= 40;object.scale.set(2.9,2.9,2.9)},
     function(xhr){console.log( xhr.loaded / xhr.total * 100 + '% OBJ loaded' )}
 )
 
