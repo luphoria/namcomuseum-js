@@ -36,17 +36,10 @@ function getCoords(box,collision) { // Spent way too long trying to make a giant
 }
 
 var geometry = new THREE.BoxGeometry( 50, 50, 50 )
-var material = new THREE.MeshLambertMaterial( {color: 0xFF00FF} )
+var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var debugCube = new THREE.Mesh( geometry, material )
 scene.add( debugCube )
 var debugCubeCollision = getCoords(debugCube,true)
-
-var light = new THREE.PointLight(0xFFFFFF)
-var light2 = new THREE.PointLight(0xFFFFFF)
-light.position.set(30, 30, 30)
-light2.position.set(-30,-30,-30)
-
-scene.add(light)
 
 document.onkeydown = function(k) {
     if(k.code != "KeyE") camera.rotation.x -= 0.05
@@ -83,18 +76,4 @@ document.onkeydown = function(k) {
     }
 }
 
-/*
-// TUTORIAL IN RENDERING OBJECTS //
-var dodecahedronGeometry = new THREE.DodecahedronGeometry(14)
-var lambertMaterial = new THREE.MeshLambertMaterial({color: 0xEAEFF2})
-var dodecahedron = new THREE.Mesh(dodecahedronGeometry, lambertMaterial)
-dodecahedron.position.x = 0
-
-var light = new THREE.PointLight(0xFFFFFF)
-light.position.set(-10, 15, 50)
-
-scene.add(light)
-scene.add(dodecahedron)
-// END TUTORIAL //
-*/
 render()
