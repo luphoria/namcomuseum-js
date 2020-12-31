@@ -2,12 +2,12 @@ import { OBJLoader2} from "./lib/OBJLoader2.js"
 import * as THREE from "./lib/three.module.js"
 import "./lib/keydrown.min.js"
 
-var WIDTH = 320
-var HEIGHT = 224
+var WIDTH = 640
+var HEIGHT = 448
 
 var rd = new THREE.WebGLRenderer({antialias:true}) // creates webgl rendering area
 rd.setSize(WIDTH,HEIGHT) // configs area..
-rd.setClearColor(0x00C0DD,1)
+rd.setClearColor(0xFFFFFF,1)
 window.document.body.appendChild(rd.domElement)
 
 var scene = new THREE.Scene()
