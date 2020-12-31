@@ -32,11 +32,21 @@ function render() {
     camera.position.z = player.position.z
     // Note the omission of .x rotation
     camera.rotation.y = player.rotation.y
-    camera.rotation.z = player.rotation.z
-    if(lookUpToggler) camera.rotation.x += 0.01
-    else camera.rotation.x -= 0.01
-    if(camera.rotation.x > 0.6) camera.rotation.x = 0.6
-    else if(camera.rotation.x < 0) camera.rotation.x = 0
+    // camera.rotation.z = player.rotation.z
+    if(lookUpToggler) {
+        camera.rotation.x += 0.01
+        camera.rotation.z += 0.01
+    } else {
+        camera.rotation.x -= 0.01
+        camera.rotation.z -= 0.01
+    }
+    if(camera.rotation.x > 0.6 || camera.rotation.z > 0.6) {
+        camera.rotation.x = 0.6
+        camera.rotation.z = 0.6
+    } else if(camera.rotation.x < 0 || camera.rotation.z < 0) {
+        camera.rotation.x = 0
+        camera.rotation.z = 0
+    }
     rd.render(scene,camera)
 }
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
