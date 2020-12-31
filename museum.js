@@ -81,7 +81,6 @@ var material = new THREE.MeshLambertMaterial( {color: 0xFF00FF} )
 var debugCube = new THREE.Mesh( geometry, material )
 scene.add( debugCube )
 var debugCubeCollision = getCoords(debugCube,true)
-console.log(debugCubeCollision)
 
 var light = new THREE.PointLight(0xFFFFFF)
 var light2 = new THREE.PointLight(0xFFFFFF)
