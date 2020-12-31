@@ -30,7 +30,7 @@ function render() {
     if(camera.rotation.x < 0) camera.rotation.x = 0
     document.onkeydown = function(k) {
         if(k.code != "KeyE") camera.rotation.x -= 0.05
-        switch (k.code) { // TODO fix negative position camera rotation movement
+        switch (k.code) {
             case "KeyA": // left
                 camera.rotation.y += 0.2
                 if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
