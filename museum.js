@@ -1,4 +1,5 @@
-import "./lib/three.min.js" 
+import { OBJLoader2} from "./lib/OBJLoader2.js"
+import * as THREE from "./lib/three.module.js"
 
 var WIDTH = 320
 var HEIGHT = 224
@@ -56,6 +57,17 @@ debugCube2.position.x += 80
 var debugCube2Collision = getCoords(debugCube2,true)
 
 var col = [debugCubeCollision,"&",debugCube2Collision]
+
+
+const loader = new OBJLoader2()
+loader.load(
+    "./assets/obj/lob.obj",
+    function(object) {scene.add(object)},
+    function(xhr){console.log( xhr.loaded / xhr.total * 100 + '%' )}
+)
+
+
+
 document.onkeydown = function(k) {
     if(k.code != "KeyE") camera.rotation.x -= 0.05
     if(camera.rotation.x < 0) camera.rotation.x = 0
