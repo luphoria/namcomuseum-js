@@ -13,19 +13,20 @@ var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera(70,WIDTH/HEIGHT) // creates camera
 camera.position.y = 3
 camera.position.z = 140
+var dir = new THREE.Vector3()
 
 scene.add(camera)
 
 console.error("fuck"); console.error("somebody opened the console"); console.error("shit"); console.error("what do i do now"); console.warn("Please do be careful, the console can be used to steal your data! It may also make the game react in odd ways.\n\nNot as much as you may expect can be done here, due to everything being obfuscated on runtime. Hate to get your hopes down.")
 
-//var mvmtModifier = -1
+var mvmtModifier = -0.5
 
 /* define functions */
 function render() {
     requestAnimationFrame(render)
-    //if(debugCube.position.y < -20) mvmtModifier = +1
-    //if(debugCube.position.y > +20) mvmtModifier = -1
-    //debugCube.position.y += mvmtModifier
+    if(debugCube.position.y < -20) mvmtModifier = +0.5
+    if(debugCube.position.y > +20) mvmtModifier = -0.5
+    debugCube.position.y += mvmtModifier
     if(camera.rotation.x < 0) camera.rotation.x = 0
     document.onkeydown = function(k) {
         if(k.code != "KeyE") camera.rotation.x -= 0.05
@@ -36,30 +37,22 @@ function render() {
                 else if(Math.round(camera.rotation.y) == 3) 
                 break
             case "KeyW": // up
-                var originalPosX = camera.position.x
-                var originalPosZ = camera.position.z
-                camera.position.x -= (0.0 + (camera.rotation.y*5/6))
-                camera.position.z -= 1.0 - Math.abs(camera.rotation.y/6)
+                camera.getWorldDirection(dir)
+                camera.position.addScaledVector(dir,1)
                 if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
-                    camera.position.x += 0.0 + (camera.rotation.y*5/6)
-                    camera.position.z += 1.0 - Math.abs(camera.rotation.y/6)
+                    camera.position.addScaledVector(dir,-1)
                 }
-                console.log("Units moved GOAL: 1\nUnits moved: " + ((Math.abs(camera.position.x) - Math.abs(originalPosX)) + (Math.abs(camera.position.z) - Math.abs(originalPosZ))) + "\nRotation: " + camera.rotation.y)
                 break
             case "KeyD": // right
                 camera.rotation.y -= 0.2
                 if(camera.rotation.y >= 6 || camera.rotation.y <= -6) camera.rotation.y = 0 // 6 = full rotation
                 break
             case "KeyS": // down
-                var originalPosX = camera.position.x
-                var originalPosZ = camera.position.z
-                camera.position.x += (0.0 + (camera.rotation.y*5/6))
-                camera.position.z += 1.0 - Math.abs(camera.rotation.y/6)
+                camera.getWorldDirection(dir)
+                camera.position.addScaledVector(dir,-1)
                 if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
-                    camera.position.x -= 0.0 + (camera.rotation.y*5/6)
-                    camera.position.z -= 1.0 - Math.abs(camera.rotation.y/6)
+                    camera.position.addScaledVector(dir,1)
                 }
-                console.log("Units moved GOAL: 1\nUnits moved: " + ((Math.abs(camera.position.x) - Math.abs(originalPosX)) + (Math.abs(camera.position.z) - Math.abs(originalPosZ))))
                 break
             case "KeyE": // triangle/look up
                 camera.rotation.x += 0.05
