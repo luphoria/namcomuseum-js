@@ -10,7 +10,7 @@ window.document.body.appendChild(rd.domElement)
 
 var scene = new THREE.Scene()
 
-var camera = new THREE.PerspectiveCamera(70,WIDTH/HEIGHT) // creates camera
+var camera = new THREE.PerspectiveCamera(80,WIDTH/HEIGHT) // creates camera
 camera.position.y = 3
 camera.position.z = 140
 var dir = new THREE.Vector3()
@@ -34,13 +34,28 @@ function getCoords(box,collision) { // Spent way too long trying to make a giant
     if(collision == true) collisionModifier = 5 
     return [(box.position.x - box.geometry.parameters.width / 2) - collisionModifier,(box.position.y - box.geometry.parameters.height / 2),(box.position.z - box.geometry.parameters.depth / 2) - collisionModifier,(box.position.x + box.geometry.parameters.width / 2) + collisionModifier,(box.position.y + box.geometry.parameters.height / 2),(box.position.z + box.geometry.parameters.depth / 2 + collisionModifier)]
 }
-
+function collisionCheck() {
+    var inc = 0
+    while(col.length > inc) {
+        if(camera.position.x > col[inc][0] && camera.position.x < col[inc][3] && camera.position.z > col[inc][2] && camera.position.z < col[inc][5]) return true
+        inc += 2
+    }
+    return false
+}
 var geometry = new THREE.BoxGeometry( 50, 50, 50 )
 var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var debugCube = new THREE.Mesh( geometry, material )
 scene.add( debugCube )
 var debugCubeCollision = getCoords(debugCube,true)
 
+var geometry = new THREE.BoxGeometry(25,25,25)
+var material = new THREE.MeshBasicMaterial({color: 0xFFFF00})
+var debugCube2 = new THREE.Mesh(geometry,material)
+scene.add(debugCube2)
+debugCube2.position.x += 80
+var debugCube2Collision = getCoords(debugCube2,true)
+
+var col = [debugCubeCollision,"&",debugCube2Collision]
 document.onkeydown = function(k) {
     if(k.code != "KeyE") camera.rotation.x -= 0.05
     if(camera.rotation.x < 0) camera.rotation.x = 0
@@ -53,7 +68,7 @@ document.onkeydown = function(k) {
         case "KeyW": // up
             camera.getWorldDirection(dir)
             camera.position.addScaledVector(dir,1)
-            if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+            if(collisionCheck()) {
                 camera.position.addScaledVector(dir,-1)
             }
             break
@@ -64,7 +79,7 @@ document.onkeydown = function(k) {
         case "KeyS": // down
             camera.getWorldDirection(dir)
             camera.position.addScaledVector(dir,-1)
-            if(camera.position.x > debugCubeCollision[0] && camera.position.x < debugCubeCollision[3] && camera.position.z > debugCubeCollision[2] && camera.position.z < debugCubeCollision[5]) {
+            if(collisionCheck()) {
                 camera.position.addScaledVector(dir,1)
             }
             break
