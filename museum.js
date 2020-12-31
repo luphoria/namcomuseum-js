@@ -16,6 +16,8 @@ camera.position.z = 140
 
 scene.add(camera)
 
+console.error("fuck"); console.error("somebody opened the console"); console.error("shit"); console.error("what do i do now"); console.warn("Please do be careful, the console can be used to steal your data! It may also make the game react in odd ways.")
+
 //var mvmtModifier = -1
 
 /* define functions */
