@@ -100,7 +100,6 @@ function move(type,speed) {
         }
     } else if (type == "rotate") {
         player.rotation.y += speed/30
-        if(player.rotation.y >= 6 || player.rotation.y <= -6) player.rotation.y = 0 // 6 = full rotation
     } else { console.error("ERROR unknown move type " + type) }
 }
 
