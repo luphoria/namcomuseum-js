@@ -30,9 +30,9 @@ function render() {
     camera.position.x = player.position.x
     camera.position.y = player.position.y
     camera.position.z = player.position.z
-    // Note the omission of .x rotation
+
     camera.rotation.y = player.rotation.y
-    // camera.rotation.z = player.rotation.z
+
     if(lookUpToggler) {
         camera.rotation.x += 0.01
         camera.rotation.z += 0.01
@@ -110,6 +110,13 @@ kd.S.down(function(){move("move",spd)})
 kd.D.down(function(){move("rotate",-spd)})
 kd.E.down(function(){lookUpToggler = true})
 kd.E.up(function(){lookUpToggler = false})
+
+var myAudio = new Audio('./assets/sfx/museum.mp3'); 
+myAudio.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
+    this.currentTime = 0;
+    this.play();
+}, false);
+myAudio.play();
 
 kd.run(function(){kd.tick()})
 render()
