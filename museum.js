@@ -6,31 +6,30 @@ var WIDTH = 640
 var HEIGHT = 448
 
 var rd = new THREE.WebGLRenderer({antialias:true}) // creates webgl rendering area
+var scene = new THREE.Scene()
+var loader = new OBJLoader2()
+var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
+var dir = new THREE.Vector3()
+
 rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(0xFFFFFF,1)
 window.document.body.appendChild(rd.domElement)
-
-var scene = new THREE.Scene()
-
-var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 camera.position.y = 3
 camera.position.z = 140
-var dir = new THREE.Vector3()
+
 var spd = 1
 var lookUpToggler = false
 scene.add(camera)
 
 console.error("fuck"); console.error("somebody opened the console"); console.error("shit"); console.error("what do i do now"); console.warn("Please do be careful, the console can be used to steal your data! It may also make the game react in odd ways.\n\nNot as much as you may expect can be done here, due to everything being obfuscated on runtime. Hate to get your hopes down.")
 
-// var mvmtModifier = -0.5
-
 /* define functions */
 function render() {
     requestAnimationFrame(render)
+
     camera.position.x = player.position.x
     camera.position.y = player.position.y
     camera.position.z = player.position.z
-
     camera.rotation.y = player.rotation.y
 
     if(lookUpToggler) { camera.rotation.x += 0.01 } else { camera.rotation.x -= 0.01 }
@@ -61,6 +60,7 @@ var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var debugCube = new THREE.Mesh( geometry, material )
 scene.add( debugCube )
 debugCube.position.x += 30
+
 var debugCubeCollision = getCoords(debugCube,false)
 /*
 var geometry = new THREE.BoxGeometry(25,25,25)
@@ -72,8 +72,6 @@ var debugCube2Collision = getCoords(debugCube2,true)
 */
 var col = [debugCubeCollision,"&"/*,debugCube2Collision*/]
 
-
-const loader = new OBJLoader2()
 loader.load(
     "./assets/obj/1/OPT.obj",
     function(object) {scene.add(object);object.position.y -= 40;object.scale.set(2.9,2.9,2.9)},
@@ -87,7 +85,7 @@ function move(type,speed) {
             player.position.addScaledVector(dir,-speed)
         }
     } else if (type == "rotate") {
-        player.rotation.y += speed/30
+        player.rotation.y += speed/50
     } else { console.error("ERROR unknown move type " + type) }
 }
 
