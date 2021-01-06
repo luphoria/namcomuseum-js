@@ -13,7 +13,7 @@ var dir = new THREE.Vector3()
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(0xFFFFFF,1)
-window.document.body.appendChild(rd.domElement)
+document.getElementById("gameContainer").appendChild(rd.domElement)
 camera.position.y = 3
 camera.position.z = 140
 
@@ -26,14 +26,22 @@ console.error("fuck"); console.error("somebody opened the console"); console.err
 /* define functions */
 function render() {
     requestAnimationFrame(render)
+    player.getWorldDirection(dir)
 
     camera.position.x = player.position.x
     camera.position.y = player.position.y
     camera.position.z = player.position.z
     camera.rotation.y = player.rotation.y
 
-    if(lookUpToggler) { camera.rotation.x += 0.01 } else { camera.rotation.x -= 0.01 }
+    if(lookUpToggler) { 
+      camera.rotation.x += dir.x * 0.01
+      camera.rotation.z -= dir.z * 0.01
+    } else { 
+      camera.rotation.x -= 0.01 
+      camera.rotation.z -= 0.01
+    }
     if(camera.rotation.x > 0.6) { camera.rotation.x = 0.6 } else if(camera.rotation.x < 0) { camera.rotation.x = 0 }
+    if(camera.rotation.z > 0.6) { camera.rotation.z = 0.6 } else if(camera.rotation.z < 0) { camera.rotation.z = 0 }
     rd.render(scene,camera)
 }
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
@@ -57,20 +65,20 @@ scene.add(player)
 
 var geometry = new THREE.BoxGeometry( 250, 100, 280 )
 var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
-var debugCube = new THREE.Mesh( geometry, material )
-scene.add( debugCube )
-debugCube.position.x += 30
+var colCube1 = new THREE.Mesh( geometry, material )
+scene.add( colCube1 )
+colCube1.position.x += 30
 
-var debugCubeCollision = getCoords(debugCube,false)
+var colCube1_c = getCoords(colCube1,false)
 /*
 var geometry = new THREE.BoxGeometry(25,25,25)
 var material = new THREE.MeshBasicMaterial({color: 0xFFFF00})
-var debugCube2 = new THREE.Mesh(geometry,material)
-scene.add(debugCube2)
-debugCube2.position.x += 80
-var debugCube2Collision = getCoords(debugCube2,true)
+var colCube2 = new THREE.Mesh(geometry,material)
+scene.add(colCube2)
+colCube2.position.x += 80
+var colCube2_c = getCoords(colCube2_c,true)
 */
-var col = [debugCubeCollision,"&"/*,debugCube2Collision*/]
+var col = [colCube1_c,"&"/*,colCube2_c*/]
 
 loader.load(
     "./assets/obj/1/OPT.obj",
@@ -96,12 +104,12 @@ kd.D.down(function(){move("rotate",-spd)})
 kd.E.down(function(){lookUpToggler = true})
 kd.E.up(function(){lookUpToggler = false})
 
-var myAudio = new Audio('./assets/sfx/museum.mp3'); 
-myAudio.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
+var bgm = new Audio('./assets/sfx/museum.mp3'); 
+bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
     this.currentTime = 0;
     this.play();
 }, false);
-myAudio.play();
+bgm.play();
 
 kd.run(function(){kd.tick()})
 render()
