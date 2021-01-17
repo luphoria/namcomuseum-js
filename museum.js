@@ -59,20 +59,20 @@ var material = new THREE.MeshBasicMaterial()
 var player = new THREE.Mesh(playergeo,material)
 scene.add(player)
 player.position.y = 3
-player.position.z = -100
+player.position.z = 0
 
 var geometry = new THREE.BoxGeometry( 210, 100, 280 )
 var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var colCube1 = new THREE.Mesh( geometry, material )
 scene.add( colCube1 )
-colCube1.position.x += 30
+colCube1.position.x -= 30
 var colCube1_c = getCoords(colCube1,false)
 
 var geometry = new THREE.BoxGeometry(100,100,25)
 var material = new THREE.MeshBasicMaterial({color: 0xFFFF00})
 var colCube2 = new THREE.Mesh(geometry,material)
 scene.add(colCube2)
-colCube2.position.x -= 120
+colCube2.position.x += 120
 colCube2.position.z += 140
 var colCube2_c = getCoords(colCube2,true)
 
@@ -80,7 +80,7 @@ var geometry = new THREE.BoxGeometry(75,100,55)
 var material = new THREE.MeshBasicMaterial({color: 0xFF0000})
 var colCube3 = new THREE.Mesh(geometry,material)
 scene.add(colCube3)
-colCube3.position.x -= 100
+colCube3.position.x += 100
 colCube3.position.z -= 140
 var colCube3_c = getCoords(colCube3,true)
 
