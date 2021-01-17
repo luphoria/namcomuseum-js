@@ -49,7 +49,7 @@ function collisionCheck() {
     var inc = 0
     while(col.length > inc) {
         if(player.position.x > col[inc][0] && player.position.x < col[inc][3] && player.position.z > col[inc][2] && player.position.z < col[inc][5]) return true
-        inc += 2
+        inc += 1
     }
     return false
 }
@@ -84,7 +84,7 @@ colCube3.position.x -= 100
 colCube3.position.z -= 130
 var colCube3_c = getCoords(colCube3,true)
 
-var col = [colCube1_c,"&",colCube2_c,"&",colCube3_c]
+var col = [colCube1_c,colCube2_c,colCube3_c]
 
 loader.load(
     "./assets/obj/1/OPT.obj",
