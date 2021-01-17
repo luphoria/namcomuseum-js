@@ -19,8 +19,6 @@ var spd = 1
 var lookUpToggler = false
 scene.add(camera)
 
-console.error("fuck"); console.error("somebody opened the console"); console.error("shit"); console.error("what do i do now"); console.warn("Please do be careful, the console can be used to steal your data! It may also make the game react in odd ways.\n\nNot as much as you may expect can be done here, due to everything being obfuscated on runtime. Hate to get your hopes down.")
-
 /* define functions */
 function render() {
     requestAnimationFrame(render)
