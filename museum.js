@@ -10,6 +10,7 @@ var scene = new THREE.Scene()
 var loader = new OBJLoader2()
 var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 var dir = new THREE.Vector3()
+var material = new THREE.MeshBasicMaterial({visible: false})
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(0xFFFFFF,1)
@@ -64,14 +65,12 @@ player.position.z = 145
 player.rotation.y = 1.57
 
 var geometry = new THREE.BoxGeometry( 220, 100, 290 )
-var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var colCube1 = new THREE.Mesh( geometry, material )
 scene.add( colCube1 )
 colCube1.position.x -= 30
 var colCube1_c = getCoords(colCube1,false)
 
 var geometry = new THREE.BoxGeometry(100,100,25)
-var material = new THREE.MeshBasicMaterial({color: 0xFFFF00})
 var colCube2 = new THREE.Mesh(geometry,material)
 scene.add(colCube2)
 colCube2.position.x += 120
@@ -79,7 +78,6 @@ colCube2.position.z += 140
 var colCube2_c = getCoords(colCube2,true)
 
 var geometry = new THREE.BoxGeometry(75,100,55)
-var material = new THREE.MeshBasicMaterial({color: 0xFF0000})
 var colCube3 = new THREE.Mesh(geometry,material)
 scene.add(colCube3)
 colCube3.position.x += 100
