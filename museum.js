@@ -76,12 +76,12 @@ colCube2.position.x -= 120
 colCube2.position.z += 140
 var colCube2_c = getCoords(colCube2,true)
 
-var geometry = new THREE.BoxGeometry(75,100,75)
+var geometry = new THREE.BoxGeometry(75,100,55)
 var material = new THREE.MeshBasicMaterial({color: 0xFF0000})
 var colCube3 = new THREE.Mesh(geometry,material)
 scene.add(colCube3)
 colCube3.position.x -= 100
-colCube3.position.z -= 130
+colCube3.position.z -= 140
 var colCube3_c = getCoords(colCube3,true)
 
 var col = [colCube1_c,colCube2_c,colCube3_c]
