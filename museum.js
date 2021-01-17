@@ -58,10 +58,12 @@ var playergeo = new THREE.BoxGeometry(40,40,40)
 var material = new THREE.MeshBasicMaterial()
 var player = new THREE.Mesh(playergeo,material)
 scene.add(player)
-player.position.y = 3
-player.position.z = 0
+player.position.x = 160
+player.position.y = 8
+player.position.z = 145
+player.rotation.y = 1.57
 
-var geometry = new THREE.BoxGeometry( 210, 100, 280 )
+var geometry = new THREE.BoxGeometry( 220, 100, 290 )
 var material = new THREE.MeshBasicMaterial( {color: 0xFF00FF} )
 var colCube1 = new THREE.Mesh( geometry, material )
 scene.add( colCube1 )
