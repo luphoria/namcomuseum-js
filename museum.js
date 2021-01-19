@@ -1,6 +1,6 @@
 import { OBJLoader2} from "./lib/OBJLoader2.js"
-import { MTLLoader } from './lib/MTLLoader.js'
 import * as THREE from "./lib/three.module.js"
+import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
 
 var WIDTH = 640
