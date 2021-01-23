@@ -114,6 +114,7 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
     materials.preload();
 
     var objLoader = new OBJLoader( manager );
+        console.log(materials.materials)
         objLoader.setMaterials( materials );
         objLoader.setPath( './assets/obj/1/FRO/' );
         objLoader.load( 'FRO.obj', function ( object ) {
