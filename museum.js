@@ -120,6 +120,7 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
         objLoader.load( 'FRO.obj', function ( object ) {
             object.scale.set(4,4,4)
             object.position.y = - 40
+            object.anisotropy = 100
             scene.add( object );
 
         });
