@@ -1,4 +1,4 @@
-import { OBJLoader2} from "./lib/OBJLoader2.js"
+import { OBJLoader} from "./lib/OBJLoader.js"
 import * as THREE from "./lib/three.module.js"
 import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
@@ -9,7 +9,7 @@ var HEIGHT = 448
 var manager = new THREE.LoadingManager();
 var rd = new THREE.WebGLRenderer({antialias:false}) // creates webgl rendering area
 var scene = new THREE.Scene()
-var loader = new OBJLoader2()
+var loader = new OBJLoader()
 var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 var dir = new THREE.Vector3()
 var material = new THREE.MeshBasicMaterial({visible: false})
@@ -103,16 +103,16 @@ loader.load(
     function(xhr){if(xhr.loaded / xhr.total * 100 != 100) {document.getElementById("loading").style.visibility = "visible"} else {document.getElementById("loading").style.visibility = "hidden"}}
 )
 */
-new MTLLoader( manager )
-.setPath( './assets/obj/1/FRO/' )
-.load( 'FRO.mtl', function ( materials ) {
+var mtlLoader = new MTLLoader( manager )
+mtlLoader.setPath( './assets/obj/1/FRO/' )
+mtlLoader.load( 'FRO.mtl', function ( materials ) {
 
     materials.preload();
 
-    new OBJLoader2( manager )
-        // .setMaterials( materials ) // TODO FIX THIS
-        .setPath( './assets/obj/1/FRO/' )
-        .load( './assets/obj/1/FRO/FRO.obj', function ( object ) {
+    var objLoader = new OBJLoader( manager );
+        objLoader.setMaterials( materials ); // TODO FIX THIS
+        objLoader.setPath( './assets/obj/1/FRO/' );
+        objLoader.load( 'FRO.obj', function ( object ) {
 
             object.position.y = - 40;
             scene.add( object );
