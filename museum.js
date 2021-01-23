@@ -63,7 +63,7 @@ var player = new THREE.Mesh(playergeo,material)
 scene.add(player)
 
 
-player.position.y = -30
+player.position.y = -28
 
 /*opt
 player.position.x = 160
