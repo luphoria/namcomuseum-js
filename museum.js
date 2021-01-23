@@ -71,6 +71,10 @@ player.position.z = 145
 player.rotation.y = 1.57
 */
 // fro
+
+const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 );
+scene.add( ambientLight );
+
 player.position.x = 0
 player.position.z = 0
 player.rotation.y = 1.57
