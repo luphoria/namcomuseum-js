@@ -6,6 +6,7 @@ import "./lib/keydrown.min.js"
 var WIDTH = 640
 var HEIGHT = 448
 
+var manager = new THREE.LoadingManager();
 var rd = new THREE.WebGLRenderer({antialias:false}) // creates webgl rendering area
 var scene = new THREE.Scene()
 var loader = new OBJLoader2()
@@ -108,15 +109,15 @@ new MTLLoader( manager )
 
     materials.preload();
 
-    new OBJLoader( manager )
-        .setMaterials( materials )
+    new OBJLoader2( manager )
+        // .setMaterials( materials ) // TODO FIX THIS
         .setPath( './assets/obj/1/FRO/' )
-        .load( 'FRO.obj', function ( object ) {
+        .load( './assets/obj/1/FRO/FRO.obj', function ( object ) {
 
             object.position.y = - 40;
             scene.add( object );
 
-        }, onProgress, onError );
+        });
 
 } );
 
