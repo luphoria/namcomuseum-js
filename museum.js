@@ -16,10 +16,10 @@ var material = new THREE.MeshBasicMaterial({visible: false})
 var debugMaterial = new THREE.MeshBasicMaterial({color: 0xFF0000})
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
-rd.setClearColor(0xCFFFBD,1)
+rd.setClearColor(0x930000,1)
 document.getElementById("gameContainer").appendChild(rd.domElement)
 
-var spd = 1
+var spd = 0.5
 var lookUpToggler = false
 scene.add(camera)
 
