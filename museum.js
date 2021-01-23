@@ -114,11 +114,11 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
     materials.preload();
 
     var objLoader = new OBJLoader( manager );
-        objLoader.setMaterials( materials ); // TODO FIX THIS
+        objLoader.setMaterials( materials );
         objLoader.setPath( './assets/obj/1/FRO/' );
         objLoader.load( 'FRO.obj', function ( object ) {
             object.scale.set(4,4,4)
-            object.position.y = - 40;
+            object.position.y = - 40
             scene.add( object );
 
         });
