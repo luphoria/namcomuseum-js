@@ -141,6 +141,7 @@ function move(type,speed) {
         player.getWorldDirection(dir)
         player.position.addScaledVector(dir,speed)
         if(!collisionCheck()) {
+            console.info(dir)
             player.position.addScaledVector(dir,-speed)
         }
     } else if (type == "rotate") {
