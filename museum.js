@@ -1,5 +1,5 @@
-import { OBJLoader} from "./lib/OBJLoader.js"
 import * as THREE from "./lib/three.module.js"
+import { OBJLoader} from "./lib/OBJLoader.js"
 import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
 
@@ -71,7 +71,7 @@ player.rotation.y = 1.57
 */
 // fro
 
-const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 );
+const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1000 );
 scene.add( ambientLight );
 
 player.position.x = 0
