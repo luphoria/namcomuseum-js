@@ -139,10 +139,10 @@ function move(type,speed) {
     if(type == "move") {
         if(kd.Q.isDown()) speed *= 1.7
         player.getWorldDirection(dir)
-        player.position.x += dir.x
-        if(!collisionCheck()) player.position.x -= dir.x
-        player.position.z += dir.z
-        if(!collisionCheck()) player.position.z -= dir.z
+        player.position.x += dir.x * speed
+        if(!collisionCheck()) player.position.x -= dir.x * speed
+        player.position.z += dir.z * speed
+        if(!collisionCheck()) player.position.z -= dir.z * speed
     } else if (type == "rotate") {
         player.rotation.y += speed/27
     } else { console.error("ERROR unknown move type " + type) }
