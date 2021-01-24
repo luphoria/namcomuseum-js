@@ -109,7 +109,7 @@ colCube1.position.y -= 30
 colCube1.position.x += 5
 var colCube1_c = getCoords(colCube1,false)
 
-var geometry = new THREE.BoxGeometry( 93, 40, 30 )
+var geometry = new THREE.BoxGeometry( 93, 40, 20 )
 var colCube2 = new THREE.Mesh( geometry, material )
 scene.add( colCube2 )
 colCube2.position.y -= 30
