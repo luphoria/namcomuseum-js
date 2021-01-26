@@ -71,7 +71,7 @@ player.rotation.y = 1.57
 */
 // fro
 
-const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1000 );
+const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 );
 scene.add( ambientLight );
 
 player.position.x = 0
@@ -128,7 +128,6 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
         objLoader.load( 'FRO.obj', function ( object ) {
             object.scale.set(4,4,4)
             object.position.y = - 40
-            object.anisotropy = 100
             scene.add( object );
 
         });
