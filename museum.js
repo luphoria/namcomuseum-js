@@ -32,15 +32,6 @@ function render() {
     camera.position.z = player.position.z
     camera.rotation.y = player.rotation.y
 
-    if(lookUpToggler) { 
-      camera.rotation.x += dir.x * 0.01
-      camera.rotation.z -= dir.z * 0.01
-    } else { 
-      camera.rotation.x -= 0.01 
-      camera.rotation.z -= 0.01
-    }
-    if(camera.rotation.x > 0.6) { camera.rotation.x = 0.6 } else if(camera.rotation.x < 0) { camera.rotation.x = 0 }
-    if(camera.rotation.z > 0.6) { camera.rotation.z = 0.6 } else if(camera.rotation.z < 0) { camera.rotation.z = 0 }
     rd.render(scene,camera)
 }
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
@@ -135,24 +126,30 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
 } );
 
 function move(type,speed) {
-    if(type == "move") {
-        if(kd.Q.isDown()) speed *= 1.7
-        player.getWorldDirection(dir)
-        player.position.x += dir.x * speed
-        if(!collisionCheck()) player.position.x -= dir.x * speed
-        player.position.z += dir.z * speed
-        if(!collisionCheck()) player.position.z -= dir.z * speed
-    } else if (type == "rotate") {
-        player.rotation.y += speed/27
-    } else { console.error("ERROR unknown move type " + type) }
+    switch(type) {
+        case "move":
+            if(kd.Q.isDown()) speed *= 1.7
+            player.getWorldDirection(dir)
+            player.position.x += dir.x * speed
+            if(!collisionCheck()) player.position.x -= dir.x * speed
+            player.position.z += dir.z * speed
+            if(!collisionCheck()) player.position.z -= dir.z * speed
+            break
+        case "rotate":
+            player.rotation.y += speed/27
+            break
+        default: 
+            console.error("ERROR unknown move type " + type)
+            break
+    }
 }
 
 kd.W.down(function(){move("move",-spd)})
 kd.A.down(function(){move("rotate",spd)})
 kd.S.down(function(){move("move",spd)})
 kd.D.down(function(){move("rotate",-spd)})
-kd.E.down(function(){lookUpToggler = true})
-kd.E.up(function(){lookUpToggler = false})
+kd.E.down(function(){move("lookup"),spd})
+kd.E.up(function(){move("lookup"),-spd})
 
 var bgm = new Audio('./assets/sfx/museum.mp3'); 
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
