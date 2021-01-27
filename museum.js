@@ -12,7 +12,7 @@ var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 var dir = new THREE.Vector3()
 var material = new THREE.MeshBasicMaterial({visible: false})
-var debugMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF})
+var debugMaterial = new THREE.MeshPhongMaterial({color: 0x0000FF})
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(0x930000,1)
@@ -27,7 +27,10 @@ function render() {
     requestAnimationFrame(render)
     player.getWorldDirection(dir)
 
-    camera.position.x = player.position.x
+    player.rotation.x -= 0.005
+    if(player.rotation.x < 0) player.rotation.x = 0
+
+    camera.position.x = player.position.x + 40
     camera.position.y = player.position.y
     camera.position.z = player.position.z
     camera.rotation.y = player.rotation.y
@@ -36,7 +39,7 @@ function render() {
 }
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
     var collisionModifier = 0 // defines collisionModifier to not return undefined on collision == false
-    if(collision == true) collisionModifier = 5 
+    if(collision == true) collisionModifier = -3
     return [(box.position.x - box.geometry.parameters.width / 2) - collisionModifier,(box.position.y - box.geometry.parameters.height / 2),(box.position.z - box.geometry.parameters.depth / 2) - collisionModifier,(box.position.x + box.geometry.parameters.width / 2) + collisionModifier,(box.position.y + box.geometry.parameters.height / 2),(box.position.z + box.geometry.parameters.depth / 2 + collisionModifier)]
 }
 function collisionCheck() {
@@ -48,8 +51,8 @@ function collisionCheck() {
     return false
 }
 
-var playergeo = new THREE.BoxGeometry(40,40,40)
-var player = new THREE.Mesh(playergeo,material)
+var playergeo = new THREE.BoxGeometry(3,3,3)
+var player = new THREE.Mesh(playergeo,debugMaterial)
 scene.add(player)
 
 
@@ -97,14 +100,14 @@ var colCube1 = new THREE.Mesh( geometry, material )
 scene.add( colCube1 )
 colCube1.position.y -= 30
 colCube1.position.x += 5
-var colCube1_c = getCoords(colCube1,false)
+var colCube1_c = getCoords(colCube1,true)
 
 var geometry = new THREE.BoxGeometry( 93, 40, 20 )
 var colCube2 = new THREE.Mesh( geometry, material )
 scene.add( colCube2 )
 colCube2.position.y -= 30
 colCube2.position.x += 6
-var colCube2_c = getCoords(colCube2,false)
+var colCube2_c = getCoords(colCube2,true)
 var col = [colCube1_c,colCube2_c]
 
 var mtlLoader = new MTLLoader( manager )
@@ -138,6 +141,11 @@ function move(type,speed) {
         case "rotate":
             player.rotation.y += speed/27
             break
+        case "lookup":
+            camera.getWorldDirection(dir)
+            player.rotation.x += speed / 50
+            if(player.rotation.x > 0.6) player.rotation.x = 0.6
+            break
         default: 
             console.error("ERROR unknown move type " + type)
             break
@@ -148,8 +156,8 @@ kd.W.down(function(){move("move",-spd)})
 kd.A.down(function(){move("rotate",spd)})
 kd.S.down(function(){move("move",spd)})
 kd.D.down(function(){move("rotate",-spd)})
-kd.E.down(function(){move("lookup"),spd})
-kd.E.up(function(){move("lookup"),-spd})
+kd.E.down(function(){move("lookup",spd)})
+kd.E.up(function(){move("lookup",-spd)})
 
 var bgm = new Audio('./assets/sfx/museum.mp3'); 
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
