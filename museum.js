@@ -3,7 +3,7 @@ import { OBJLoader} from "./lib/OBJLoader.js"
 import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
 
-var WIDTH = 320
+var WIDTH = 320 // original PSX size
 var HEIGHT = 224
 
 var manager = new THREE.LoadingManager();
@@ -18,8 +18,9 @@ rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(0x930000,1)
 document.getElementById("gameContainer").appendChild(rd.domElement)
 
+camera.rotation.y = 1.5
+
 var spd = 0.5
-var lookUpToggler = false
 scene.add(camera)
 
 /* define functions */
@@ -27,13 +28,13 @@ function render() {
     requestAnimationFrame(render)
     player.getWorldDirection(dir)
 
-    player.rotation.x -= 0.005
-    if(player.rotation.x < 0) player.rotation.x = 0
+    player.rotation.x -= 0.005 // This is probably a bad way to do it but i have player constantly looking down to accomodate lookup onkeyup.
+    if(player.rotation.x < 0) player.rotation.x = 0 // Reverts rotation to 0 if it looks down any more.
 
-    camera.position.x = player.position.x + 40
+    camera.position.x = player.position.x + 40 // + 40 for debugging purposes
     camera.position.y = player.position.y
     camera.position.z = player.position.z
-    camera.rotation.y = player.rotation.y
+    // camera.rotation.y = player.rotation.y
 
     rd.render(scene,camera)
 }
@@ -45,6 +46,7 @@ function getCoords(box,collision) { // Spent way too long trying to make a giant
 function collisionCheck() {
     var inc = 0
     while(col.length > inc) {
+        // The increment is per collision cube, it checks for collision on each coordinate for a cube, and if it does not return true then it will keep going to the next collision cube. //
         if(player.position.x > col[inc][0] && player.position.x < col[inc][3] && player.position.z > col[inc][2] && player.position.z < col[inc][5]) return true
         inc += 1
     }
@@ -55,8 +57,8 @@ var playergeo = new THREE.BoxGeometry(3,3,3)
 var player = new THREE.Mesh(playergeo,debugMaterial)
 scene.add(player)
 
-
-player.position.y = -28
+const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 ); // This should be 100% gamma.
+scene.add( ambientLight );
 
 /*opt
 player.position.x = 160
@@ -64,13 +66,11 @@ player.position.z = 145
 player.rotation.y = 1.57
 */
 // fro
-
-const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 );
-scene.add( ambientLight );
+player.position.y = -28
 
 player.position.x = 0
 player.position.z = 0
-player.rotation.y = 1.57
+player.rotation.y = 1.57 // TODO make it a bit more accurate
 /* OPT
 var geometry = new THREE.BoxGeometry( 220, 100, 290 )
 var colCube1 = new THREE.Mesh( geometry, material )
@@ -95,6 +95,7 @@ var colCube3_c = getCoords(colCube3,true)
 
 var col = [colCube1_c,colCube2_c,colCube3_c]
 */
+// At the moment, the way I am creating collision is with actual cubes ingame. TODO remove them because all it is doing is generating coordinates anyways.
 var geometry = new THREE.BoxGeometry( 40, 30, 60 )
 var colCube1 = new THREE.Mesh( geometry, material )
 scene.add( colCube1 )
@@ -108,7 +109,7 @@ scene.add( colCube2 )
 colCube2.position.y -= 30
 colCube2.position.x += 6
 var colCube2_c = getCoords(colCube2,true)
-var col = [colCube1_c,colCube2_c]
+var col = [colCube1_c,colCube2_c] // master collision object, uses nested arrays e.g. `col[0][0]` -- surprisingly usable
 
 var mtlLoader = new MTLLoader( manager )
 mtlLoader.setPath( './assets/obj/1/FRO/' )
@@ -116,11 +117,11 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
 
     materials.preload();
 
-    var objLoader = new OBJLoader( manager );
+    var objLoader = new OBJLoader( manager ); // use objLoader over objLoader2 for MTL support
         objLoader.setMaterials( materials );
         objLoader.setPath( './assets/obj/1/FRO/' );
         objLoader.load( 'FRO.obj', function ( object ) {
-            object.scale.set(4,4,4)
+            object.scale.set(4,4,4) // TODO accirate scaling
             object.position.y = - 40
             scene.add( object );
 
@@ -133,6 +134,7 @@ function move(type,speed) {
         case "move":
             if(kd.Q.isDown()) speed *= 1.7
             player.getWorldDirection(dir)
+            // Could applyScaledVector, however splitting X and Z application allows for collision detection to "slide" you down walls.
             player.position.x += dir.x * speed
             if(!collisionCheck()) player.position.x -= dir.x * speed
             player.position.z += dir.z * speed
@@ -142,16 +144,24 @@ function move(type,speed) {
             player.rotation.y += speed/27
             break
         case "lookup":
+            /*
+                TODO FIX THIS
+                Currently broken.
+                Ideas:
+                - Rotate in general using z and y both, might allow for rotation.x to not only go one way.
+                - Use three.js built in rotation functions. These will definitely be a learning curve.
+            */
             camera.getWorldDirection(dir)
             player.rotation.x += speed / 50
-            if(player.rotation.x > 0.6) player.rotation.x = 0.6
+            if(player.rotation.x > 0.6) player.rotation.x = 0.6 // lock lookup like in original game
             break
-        default: 
-            console.error("ERROR unknown move type " + type)
+        default: // fallback
+            console.error("ERROR unknown move type " + type) // theoretically this should never be called
             break
     }
 }
 
+// key input checks
 kd.W.down(function(){move("move",-spd)})
 kd.A.down(function(){move("rotate",spd)})
 kd.S.down(function(){move("move",spd)})
@@ -159,12 +169,12 @@ kd.D.down(function(){move("rotate",-spd)})
 kd.E.down(function(){move("lookup",spd)})
 kd.E.up(function(){move("lookup",-spd)})
 
-var bgm = new Audio('./assets/sfx/museum.mp3'); 
+var bgm = new Audio('./assets/sfx/museum.mp3'); // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
     this.currentTime = 0;
     this.play();
 }, false);
 bgm.play();
 
-kd.run(function(){kd.tick()})
+kd.run(function(){kd.tick()}) // KD refreshing for input detection
 render()
