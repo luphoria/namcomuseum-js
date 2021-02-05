@@ -28,13 +28,15 @@ function render() {
     requestAnimationFrame(render)
     player.getWorldDirection(dir)
 
-    player.rotation.x -= 0.005 // This is probably a bad way to do it but i have player constantly looking down to accomodate lookup onkeyup.
+    if(!kd.E.isDown()) player.rotation.x -= spd / 50
     if(player.rotation.x < 0) player.rotation.x = 0 // Reverts rotation to 0 if it looks down any more.
 
-    camera.position.x = player.position.x + 40 // + 40 for debugging purposes
+    camera.position.x = player.position.x // + 40 for debugging purposes
     camera.position.y = player.position.y
     camera.position.z = player.position.z
-    // camera.rotation.y = player.rotation.y
+    camera.rotation.y = player.rotation.y
+
+    camera.rotation.x = player.rotation.x
 
     rd.render(scene,camera)
 }
@@ -110,7 +112,8 @@ colCube2.position.y -= 30
 colCube2.position.x += 6
 var colCube2_c = getCoords(colCube2,true)
 var col = [colCube1_c,colCube2_c] // master collision object, uses nested arrays e.g. `col[0][0]` -- surprisingly usable
-
+// let col = [[3,-30,3,77,90,117],[3,-20,3,183,100,37]]
+console.log(col)
 var mtlLoader = new MTLLoader( manager )
 mtlLoader.setPath( './assets/obj/1/FRO/' )
 mtlLoader.load( 'FRO.mtl', function ( materials ) {
@@ -121,8 +124,8 @@ mtlLoader.load( 'FRO.mtl', function ( materials ) {
         objLoader.setMaterials( materials );
         objLoader.setPath( './assets/obj/1/FRO/' );
         objLoader.load( 'FRO.obj', function ( object ) {
-            object.scale.set(4,4,4) // TODO accirate scaling
-            object.position.y = - 40
+            object.scale.set(0.01,0.01,0.01) // TODO accirate scaling
+            object.position.y =- 42
             scene.add( object );
 
         });
@@ -156,8 +159,7 @@ function move(type,speed) {
             if(player.rotation.x > 0.6) player.rotation.x = 0.6 // lock lookup like in original game
             break
         default: // fallback
-            console.error("ERROR unknown move type " + type) // theoretically this should never be called
-            break
+            throw "fuck u and your nonexistent move type: " + type // theoretically this should never be called
     }
 }
 
@@ -167,7 +169,6 @@ kd.A.down(function(){move("rotate",spd)})
 kd.S.down(function(){move("move",spd)})
 kd.D.down(function(){move("rotate",-spd)})
 kd.E.down(function(){move("lookup",spd)})
-kd.E.up(function(){move("lookup",-spd)})
 
 var bgm = new Audio('./assets/sfx/museum.mp3'); // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
