@@ -2,6 +2,7 @@ import * as THREE from "./lib/three.module.js"
 import { OBJLoader} from "./lib/OBJLoader.js"
 import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
+import { SelectedLevel } from "./levels/selected.js"
 
 var WIDTH = 320 // original PSX size
 var HEIGHT = 224
@@ -58,63 +59,25 @@ scene.add(player)
 const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 ); // This should be 100% gamma.
 scene.add( ambientLight );
 
-/*opt
-player.position.x = 160
-player.position.z = 145
-player.rotation.y = 1.57
-*/
-// fro
-player.position.y = -28
 
-player.position.x = 0
-player.position.z = 0
-player.rotation.y = 1.57 // TODO make it a bit more accurate
-/* OPT
-var geometry = new THREE.BoxGeometry( 220, 100, 290 )
-var colCube1 = new THREE.Mesh( geometry, material )
-scene.add( colCube1 )
-colCube1.position.x -= 20
-colCube1.position.z += 10
-var colCube1_c = getCoords(colCube1,false)
+player.position.x = SelectedLevel("pos")[0]
+player.position.y = SelectedLevel("pos")[1]
+player.position.z = SelectedLevel("pos")[2]
 
-var geometry = new THREE.BoxGeometry(100,100,25)
-var colCube2 = new THREE.Mesh(geometry,material)
-scene.add(colCube2)
-colCube2.position.x += 120
-colCube2.position.z += 140
-var colCube2_c = getCoords(colCube2,true)
+player.rotation.y = SelectedLevel("pos")[3]
 
-var geometry = new THREE.BoxGeometry(75,100,55)
-var colCube3 = new THREE.Mesh(geometry,material)
-scene.add(colCube3)
-colCube3.position.x += 100
-colCube3.position.z -= 140
-var colCube3_c = getCoords(colCube3,true)
-
-var col = [colCube1_c,colCube2_c,colCube3_c]
-*/
-// At the moment, the way I am creating collision is with actual cubes ingame. TODO remove them because all it is doing is generating coordinates anyways.
-
-let col = [[-12,-45,-27,22,-15,27],[-37.5,-50,-7,49.5,-10,7]] // master collision object, uses nested arrays e.g. `col[0][0]` -- surprisingly usable
-console.log(col)
+let col = SelectedLevel("col")
 var mtlLoader = new MTLLoader( manager )
-mtlLoader.setPath( './assets/obj/1/FRO/' )
-mtlLoader.load( 'FRO.mtl', function ( materials ) {
-
+mtlLoader.load( SelectedLevel("obj") + "OBJ.mtl", function ( materials ) {
     materials.preload();
-
     var objLoader = new OBJLoader( manager ); // use objLoader over objLoader2 for MTL support
-        objLoader.setMaterials( materials );
-        objLoader.setPath( './assets/obj/1/FRO/' );
-        objLoader.load( 'FRO.obj', function ( object ) {
-            object.scale.set(0.01,0.01,0.01) // TODO accirate scaling
-            object.position.y =- 42
-            scene.add( object );
-
-        });
-
+    objLoader.setMaterials( materials );
+    objLoader.load( SelectedLevel("obj") + "OBJ.obj", function ( levelobj ) {
+        levelobj.scale.set(SelectedLevel("scl"),SelectedLevel("scl"),SelectedLevel("scl"))
+        levelobj.position.y =- 42
+        scene.add(levelobj)
+    });
 } );
-
 function move(type,speed) {
     switch(type) {
         case "move":

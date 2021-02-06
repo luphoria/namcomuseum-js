@@ -43,17 +43,20 @@ function getPos(input,dir) {
 }
 /* DEFINE YOUR COLLISION CUBES HERE */
 
-let colCube1 = BoxGeometry( 40, 30, 60 )
-colCube1 = modPos(colCube1,"y",-30)
-colCube1 = modPos(colCube1,"x",5)
+let colCube1 = BoxGeometry(220,100,290)
+colCube1 = modPos(colCube1,"x",-20)
+colCube1 = modPos(colCube1,"z",10)
 
-let colCube2 = BoxGeometry( 93, 40, 20 )
-colCube2 = modPos(colCube2,"y",-30)
-colCube2 = modPos(colCube2,"x",6)
+let colCube2 = BoxGeometry(100,100,25)
+colCube2 = modPos(colCube2,"x",120)
+colCube2 = modPos(colCube2,"z",140)
 
+let colCube3 = BoxGeometry(75,100,55)
+colCube3 = modPos(colCube3,"x",100)
+colCube3 = modPos(colCube3,"z",-140)
 /* DO NOT DEFINE COLLISION CUBES BEYOND THIS POINT */
 
-let cubes = [colCube1,colCube2] // Array with all of the cubes
+let cubes = [colCube1,colCube2,colCube3] // Array with all of the cubes
 console.log(cubes)
 let col = true // Modifies collision to be LESS accurate so that it is more like the game.
 
