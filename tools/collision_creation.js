@@ -1,6 +1,5 @@
 function BoxGeometry(x,y,z) { 
-    console.log([x/2,y/2,z/2,-(x/2),-(y/2),-(z/2)])
-    return [x/2,y/2,z/2,-(x/2),-(y/2),-(z/2)]
+    return [-(x/2),-(y/2),-(z/2),(x/2),(y/2),(z/2)]
 }
 function modPos(input,dir,amount) { 
     console.log(input)
@@ -27,13 +26,16 @@ function getPos(input,dir) {
     console.log(input)
     switch(dir) {
         case "x":
-            output = input[0] - input[3]
+            output = (Math.abs(input[0]) + Math.abs(input[3])) / 2
+            output = (output - input[3]) * 2
             break
         case "y":
-            output = input[1] - input[4]
+            output = (Math.abs(input[1]) + Math.abs(input[4])) / 2
+            output = (output - input[4]) * 2
             break
         case "z":
-            output = input[2] - input[5]
+            output = (Math.abs(input[2]) + Math.abs(input[5])) / 2
+            output = (output - input[5]) * 2
             break
     }
     console.log(output)
@@ -59,19 +61,19 @@ let col = true // Modifies collision to be LESS accurate so that it is more like
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
     collisionModifier = 0 // defines collisionModifier to not return undefined on collision == false
     if(collision == true) collisionModifier = -3
-    console.log(box[0])
-    console.log(box[1])
-    console.log(box[2])
-    console.log(box[3])
-    console.log(box[4])
-    console.log(box[5])
+
+    console.log("box " + box)
+
+    console.log("x1 -- " + (getPos(box,"x") - (Math.abs(box[0]) + Math.abs(box[3])) - collisionModifier)) // should be -12
+
     return [
-        (getPos(box,"x") - (Math.abs(box[0]) + Math.abs(box[3]))) - collisionModifier,
-        (getPos(box,"y") - (Math.abs(box[1]) + Math.abs(box[4]))),
-        (getPos(box,"z") - (Math.abs(box[2]) + Math.abs(box[5]))) - collisionModifier,
-        (getPos(box,"x") + (Math.abs(box[0]) + Math.abs(box[3]))) + collisionModifier,
-        (getPos(box,"y") + (Math.abs(box[1]) + Math.abs(box[4]))),
-        (getPos(box,"z") + (Math.abs(box[2]) + Math.abs(box[5]))) + collisionModifier
+        box[0] - collisionModifier, // x1
+        box[1],                     // y1
+        box[2] - collisionModifier, // z1
+
+        box[3] + collisionModifier, // x2
+        box[4],                     // y2
+        box[5] + collisionModifier  // z2
     ]
 }
 
@@ -83,6 +85,7 @@ while(cubes.length - 1 >= inc) {
     if(cubes.length - 1 > inc) toReturn += ","
     inc++
 }
+
 toReturn = toReturn + "]"
 
 console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n========================================\n" + toReturn + "\n========================================\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")

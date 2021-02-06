@@ -40,11 +40,7 @@ function render() {
 
     rd.render(scene,camera)
 }
-function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
-    var collisionModifier = 0 // defines collisionModifier to not return undefined on collision == false
-    if(collision == true) collisionModifier = -3
-    return [(box.position.x - box.geometry.parameters.width / 2) - collisionModifier,(box.position.y - box.geometry.parameters.height / 2),(box.position.z - box.geometry.parameters.depth / 2) - collisionModifier,(box.position.x + box.geometry.parameters.width / 2) + collisionModifier,(box.position.y + box.geometry.parameters.height / 2),(box.position.z + box.geometry.parameters.depth / 2 + collisionModifier)]
-}
+
 function collisionCheck() {
     var inc = 0
     while(col.length > inc) {
@@ -98,21 +94,8 @@ var colCube3_c = getCoords(colCube3,true)
 var col = [colCube1_c,colCube2_c,colCube3_c]
 */
 // At the moment, the way I am creating collision is with actual cubes ingame. TODO remove them because all it is doing is generating coordinates anyways.
-var geometry = new THREE.BoxGeometry( 40, 30, 60 )
-var colCube1 = new THREE.Mesh( geometry, material )
-scene.add( colCube1 )
-colCube1.position.y -= 30
-colCube1.position.x += 5
-var colCube1_c = getCoords(colCube1,true)
 
-var geometry = new THREE.BoxGeometry( 93, 40, 20 )
-var colCube2 = new THREE.Mesh( geometry, material )
-scene.add( colCube2 )
-colCube2.position.y -= 30
-colCube2.position.x += 6
-var colCube2_c = getCoords(colCube2,true)
-var col = [colCube1_c,colCube2_c] // master collision object, uses nested arrays e.g. `col[0][0]` -- surprisingly usable
-// let col = [[3,-30,3,77,90,117],[3,-20,3,183,100,37]]
+let col = [[-12,-45,-27,22,-15,27],[-37.5,-50,-7,49.5,-10,7]] // master collision object, uses nested arrays e.g. `col[0][0]` -- surprisingly usable
 console.log(col)
 var mtlLoader = new MTLLoader( manager )
 mtlLoader.setPath( './assets/obj/1/FRO/' )
