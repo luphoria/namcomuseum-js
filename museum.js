@@ -72,7 +72,7 @@ mtlLoader.load( SelectedLevel("obj") + "OBJ.mtl", function ( materials ) {
     var objLoader = new OBJLoader( manager ) // use objLoader over objLoader2 for MTL support
     objLoader.setMaterials( materials )
     objLoader.load( SelectedLevel("obj") + "OBJ.obj", function ( levelobj ) {
-        levelobj.scale.set(SelectedLevel("scl"),SelectedLevel("scl"),SelectedLevel("scl"))
+        levelobj.scale.set(0.01,0.01,0.01)
         levelobj.position.y =- 42
         scene.add(levelobj)
     })
@@ -115,7 +115,7 @@ kd.S.down(function(){move("move",spd/2)})
 kd.D.down(function(){move("rotate",-spd/2)})
 kd.E.down(function(){move("lookup",spd/2)})
 
-var bgm = new Audio('./assets/sfx/museum.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
+var bgm = new Audio('./assets/sfx/' + SelectedLevel("sfx") + '.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
     this.currentTime = 0
     this.play()

@@ -5,7 +5,7 @@ export const GB_entry_2 = [
     
     "./levels/2/GB/obj/",
 
-    0.01,
+    "GB2",
 
     0x000000
 ]

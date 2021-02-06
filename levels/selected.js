@@ -49,7 +49,7 @@ export const SelectedLevel = (request) => {
                 default:
                     throw "unimplemented level " + selected
             }
-        case "scl":
+        case "sfx":
             switch(selected) {
                 case "FRO1":
                     return FRO_entry_1[3]
