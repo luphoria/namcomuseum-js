@@ -56,8 +56,8 @@ var playergeo = new THREE.BoxGeometry(3,3,3)
 var player = new THREE.Mesh(playergeo,debugMaterial)
 scene.add(player)
 
-const ambientLight = new THREE.AmbientLight( 0xFFFFFF, 1 ); // This should be 100% gamma.
-scene.add( ambientLight );
+const light = new THREE.AmbientLight( 0xFFFFFF, 2 ); // This should be 200% gamma? Looks like original game
+scene.add( light );
 
 
 player.position.x = SelectedLevel("pos")[0]
