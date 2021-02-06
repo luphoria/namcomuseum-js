@@ -3,7 +3,7 @@ import {OPT_entry_1} from "./1/OPT/script.js"
 import {OPT_entry_2} from "./2/OPT/script.js"
 import {GB_entry_2} from "./2/GB/script.js"
 
-const selected = "GB2" // prompt("Enter level (e.g. \"FRO1\")")
+const selected = prompt("Enter level (e.g. \"FRO1\")")
 
 export const SelectedLevel = (request) => {
     switch(request) {
