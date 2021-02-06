@@ -21,7 +21,7 @@ document.getElementById("gameContainer").appendChild(rd.domElement)
 
 camera.rotation.y = 1.5
 
-var spd = 0.5
+const spd = 1
 scene.add(camera)
 
 /* define functions */
@@ -110,11 +110,11 @@ function move(type,speed) {
 }
 
 // key input checks
-kd.W.down(function(){move("move",-spd)})
-kd.A.down(function(){move("rotate",spd)})
-kd.S.down(function(){move("move",spd)})
-kd.D.down(function(){move("rotate",-spd)})
-kd.E.down(function(){move("lookup",spd)})
+kd.W.down(function(){move("move",-spd/2)})
+kd.A.down(function(){move("rotate",spd/2)})
+kd.S.down(function(){move("move",spd/2)})
+kd.D.down(function(){move("rotate",-spd/2)})
+kd.E.down(function(){move("lookup",spd/2)})
 
 var bgm = new Audio('./assets/sfx/museum.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
