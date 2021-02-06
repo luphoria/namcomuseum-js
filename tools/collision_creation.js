@@ -43,17 +43,16 @@ function getPos(input,dir) {
 }
 /* DEFINE YOUR COLLISION CUBES HERE */
 
-let colCube1 = BoxGeometry(220,100,290)
-colCube1 = modPos(colCube1,"x",-20)
-colCube1 = modPos(colCube1,"z",10)
+let colCube1 = BoxGeometry(100,100,60)
+colCube1 = modPos(colCube1,"z",65)
 
-let colCube2 = BoxGeometry(100,100,25)
-colCube2 = modPos(colCube2,"x",120)
-colCube2 = modPos(colCube2,"z",140)
+let colCube2 = BoxGeometry(50,100,33)
+colCube2 = modPos(colCube2,"x",20)
+colCube2 = modPos(colCube2,"z",-35)
 
-let colCube3 = BoxGeometry(75,100,55)
-colCube3 = modPos(colCube3,"x",100)
-colCube3 = modPos(colCube3,"z",-140)
+let colCube3 = BoxGeometry(50,100,33)
+colCube2 = modPos(colCube3,"x",20)
+colCube2 = modPos(colCube3,"z",35)
 /* DO NOT DEFINE COLLISION CUBES BEYOND THIS POINT */
 
 let cubes = [colCube1,colCube2,colCube3] // Array with all of the cubes
