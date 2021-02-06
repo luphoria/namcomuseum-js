@@ -47,17 +47,17 @@ let colCube1 = BoxGeometry(100,100,60)
 colCube1 = modPos(colCube1,"z",65)
 
 let colCube2 = BoxGeometry(50,100,33)
-colCube2 = modPos(colCube2,"x",20)
-colCube2 = modPos(colCube2,"z",-35)
+colCube2 = modPos(colCube2,"x",35)
+colCube2 = modPos(colCube2,"z",20)
 
 let colCube3 = BoxGeometry(50,100,33)
-colCube2 = modPos(colCube3,"x",20)
-colCube2 = modPos(colCube3,"z",35)
+colCube3 = modPos(colCube3,"x",-35)
+colCube3 = modPos(colCube3,"z",20)
 /* DO NOT DEFINE COLLISION CUBES BEYOND THIS POINT */
 
 let cubes = [colCube1,colCube2,colCube3] // Array with all of the cubes
 console.log(cubes)
-let col = true // Modifies collision to be LESS accurate so that it is more like the game.
+let col = false // Modifies collision to be LESS accurate so that it is more like the game.
 
 
 function getCoords(box,collision) { // Spent way too long trying to make a giant detection for negative/positive, realised i could add a modifier to a "master" return anyways. Think fucking smarter, not harder.
