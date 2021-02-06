@@ -12,7 +12,6 @@ var rd = new THREE.WebGLRenderer({antialias:false}) // creates webgl rendering a
 var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 var dir = new THREE.Vector3()
-var material = new THREE.MeshBasicMaterial({visible: false})
 var debugMaterial = new THREE.MeshPhongMaterial({color: 0x0000FF}) // TODO make this dynamic for FRO
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
