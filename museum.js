@@ -13,10 +13,10 @@ var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
 var dir = new THREE.Vector3()
 var material = new THREE.MeshBasicMaterial({visible: false})
-var debugMaterial = new THREE.MeshPhongMaterial({color: 0x000000}) // TODO make this dynamic for FRO
+var debugMaterial = new THREE.MeshPhongMaterial({color: 0x0000FF}) // TODO make this dynamic for FRO
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
-rd.setClearColor(0x930000,1)
+rd.setClearColor(SelectedLevel("clr"),1)
 document.getElementById("gameContainer").appendChild(rd.domElement)
 
 camera.rotation.y = 1.5
