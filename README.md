@@ -31,3 +31,12 @@ file:// resources because it isn't HTTP/S. I haven't tested it on Chrome.
 
 ### To fix
 Navigate to `about:config` and toggle `privacy.file_unique_origin`
+
+## Credits
+ - luphoria: code, initial attempts, initial model extracts
+ - ChewbaccaBox: model extracts, TIP reverse engineering, model texturing
+ - impiaa: TIP reverse engineering
+ - eros71: model help
+### Libraries used
+ - three.js
+ - keydrown
