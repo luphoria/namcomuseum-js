@@ -6,91 +6,41 @@ import {MAPY_entry_2} from "./2/MAPY/script.js"
 
 const selected = prompt("Enter level (e.g. \"FRO1\")")
 
+switch(selected) {
+    case "FRO1":
+        var selected_level_entry = FRO_entry_1
+        break
+    case "OPT1":
+        var selected_level_entry = OPT_entry_1
+        break
+    case "OPT2":
+        var selected_level_entry = OPT_entry_2
+        break
+    case "GB2":
+        var selected_level_entry = GB_entry_2
+        break
+    case "MAPY2":
+        var selected_level_entry = MAPY_entry_2
+        break
+    default:
+        console.error("unimplemented level \"" + selected + "\", defaulting FRO1")
+        var selected_level_entry = FRO_entry_1
+        break
+}
+
 export const SelectedLevel = (request) => {
     switch(request) {
         case "pos":
-            switch(selected) {
-                case "FRO1":
-                    return FRO_entry_1[0]
-                case "OPT1":
-                    console.warn("OPT1 is fucked")
-                    return OPT_entry_1[0]
-                case "OPT2":
-                    return OPT_entry_2[0]
-                case "GB2":
-                    return GB_entry_2[0]
-                case "MAPY2":
-                    return MAPY_entry_2[0]
-                default:
-                    throw "unimplemented level " + selected
-            }
+            return selected_level_entry[0]
         case "col":
-            switch(selected) {
-                case "FRO1":
-                    return FRO_entry_1[1]
-                case "OPT1":
-                    console.warn("OPT1 is fucked")
-                    return OPT_entry_1[1]
-                case "OPT2":
-                    return OPT_entry_2[1]
-                case "GB2":
-                    return GB_entry_2[1]
-                case "MAPY2":
-                    return MAPY_entry_2[1]
-                default:
-                    throw "unimplemented level " + selected
-            }
+            return selected_level_entry[1]
         case "obj":
-            switch(selected) {
-                case "FRO1":
-                    return FRO_entry_1[2]
-                case "OPT1":
-                    console.warn("OPT1 is fucked")
-                    return OPT_entry_1[2]
-                case "OPT2":
-                    return OPT_entry_2[2]
-                case "GB2":
-                    return GB_entry_2[2]
-                case "MAPY2":
-                    return MAPY_entry_2[2]
-                default:
-                    throw "unimplemented level " + selected
-            }
+            return selected_level_entry[2]
         case "sfx":
-            switch(selected) {
-                case "FRO1":
-                    return FRO_entry_1[3]
-                case "OPT1":
-                    console.warn("OPT1 is fucked")
-                    return OPT_entry_1[3]
-                case "OPT2":
-                    return OPT_entry_2[3]
-                case "GB2":
-                    return GB_entry_2[3]
-                case "MAPY2":
-                    return MAPY_entry_2[3]
-                default:
-                    console.error("unimplemented level, defaulting museum")
-                    return "museum"
-            }
+            return selected_level_entry[3]
         case "clr":
-            switch(selected) {
-                case "FRO1":
-                    return FRO_entry_1[4]
-                case "OPT1":
-                    console.warn("OPT1 is fucked")
-                    return OPT_entry_1[4]
-                case "OPT2":
-                    return OPT_entry_2[4]
-                case "GB2":
-                    return GB_entry_2[4]
-                case "MAPY2":
-                    return MAPY_entry_2[4]
-                default:
-                    throw "unimplemented level " + selected
-            }
+            return selected_level_entry[4]
         default:
             throw "unimplemented request " + request
     }
-
 }
