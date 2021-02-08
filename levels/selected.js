@@ -2,6 +2,7 @@ import {FRO_entry_1} from "./1/FRO/script.js"
 import {OPT_entry_1} from "./1/OPT/script.js"
 import {OPT_entry_2} from "./2/OPT/script.js"
 import {GB_entry_2} from "./2/GB/script.js"
+import {MAPY_entry_2} from "./2/MAPY/script.js"
 
 const selected = prompt("Enter level (e.g. \"FRO1\")")
 
@@ -18,6 +19,8 @@ export const SelectedLevel = (request) => {
                     return OPT_entry_2[0]
                 case "GB2":
                     return GB_entry_2[0]
+                case "MAPY2":
+                    return MAPY_entry_2[0]
                 default:
                     throw "unimplemented level " + selected
             }
@@ -32,6 +35,8 @@ export const SelectedLevel = (request) => {
                     return OPT_entry_2[1]
                 case "GB2":
                     return GB_entry_2[1]
+                case "MAPY2":
+                    return MAPY_entry_2[1]
                 default:
                     throw "unimplemented level " + selected
             }
@@ -46,6 +51,8 @@ export const SelectedLevel = (request) => {
                     return OPT_entry_2[2]
                 case "GB2":
                     return GB_entry_2[2]
+                case "MAPY2":
+                    return MAPY_entry_2[2]
                 default:
                     throw "unimplemented level " + selected
             }
@@ -60,8 +67,11 @@ export const SelectedLevel = (request) => {
                     return OPT_entry_2[3]
                 case "GB2":
                     return GB_entry_2[3]
+                case "MAPY2":
+                    return MAPY_entry_2[3]
                 default:
-                    throw "unimplemented level " + selected
+                    console.error("unimplemented level, defaulting museum")
+                    return "museum"
             }
         case "clr":
             switch(selected) {
@@ -74,6 +84,8 @@ export const SelectedLevel = (request) => {
                     return OPT_entry_2[4]
                 case "GB2":
                     return GB_entry_2[4]
+                case "MAPY2":
+                    return MAPY_entry_2[4]
                 default:
                     throw "unimplemented level " + selected
             }
