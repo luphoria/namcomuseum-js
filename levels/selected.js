@@ -25,6 +25,7 @@ switch(selected) {
         break
     case "CQ2":
         var selected_level_entry = CQ_entry_2
+        console.warn("WARN: music not implemented")
         break
     default:
         console.error("unimplemented level \"" + selected + "\", defaulting FRO1")

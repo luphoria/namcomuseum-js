@@ -5,7 +5,7 @@ export const CQ_entry_2 = [
     
     "./levels/2/CQ/obj/",
 
-    "CQ2",
+    "museum",
 
     0x000000
 ]
