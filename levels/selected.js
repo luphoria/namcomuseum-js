@@ -7,7 +7,7 @@ import {CQ_entry_2} from "./2/CQ/script.js"
 import {LOB_entry_2} from "./2/LOB/script.js"
 
 function setEntry() {
-    var selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels")
+    let selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels")
 
     switch(selected) {
     case "list":
@@ -37,7 +37,7 @@ function setEntry() {
     }
 }
 
-var selected_level_entry = setEntry()
+let selected_level_entry = setEntry()
 
 export const SelectedLevel = (request) => {
     switch(request) {

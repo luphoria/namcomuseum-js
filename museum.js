@@ -4,15 +4,15 @@ import { MTLLoader } from './lib/MTLLoader.js'
 import "./lib/keydrown.min.js"
 import { SelectedLevel } from "./levels/selected.js"
 
-var WIDTH = 320 // original PSX size
-var HEIGHT = 224
+let WIDTH = 320 // original PSX size
+let HEIGHT = 224
 
-var manager = new THREE.LoadingManager()
-var rd = new THREE.WebGLRenderer({antialias:false}) // creates webgl rendering area
-var scene = new THREE.Scene()
-var camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
-var dir = new THREE.Vector3()
-var debugMaterial = new THREE.MeshPhongMaterial({color: 0x0000FF}) // TODO make this dynamic for FRO
+let manager = new THREE.LoadingManager()
+let rd = new THREE.WebGLRenderer({antialias:false}) // creates webgl rendering area
+let scene = new THREE.Scene()
+let camera = new THREE.PerspectiveCamera(60,WIDTH/HEIGHT) // creates camera
+let dir = new THREE.Vector3()
+let debugMaterial = new THREE.MeshPhongMaterial({color: 0x0000FF}) // TODO make this dynamic for FRO
 
 rd.setSize(WIDTH,HEIGHT) // configs area..
 rd.setClearColor(SelectedLevel("clr"),1)
@@ -42,7 +42,7 @@ function render() {
 }
 
 function collisionCheck() {
-    var inc = 0
+    let inc = 0
     while(col.length > inc) {
         // The increment is per collision cube, it checks for collision on each coordinate for a cube, and if it does not return true then it will keep going to the next collision cube. //
         if(player.position.x > col[inc][0] && player.position.x < col[inc][3] && player.position.z > col[inc][2] && player.position.z < col[inc][5]) return true
@@ -51,8 +51,8 @@ function collisionCheck() {
     return false
 }
 
-var playergeo = new THREE.BoxGeometry(3,3,3)
-var player = new THREE.Mesh(playergeo,debugMaterial)
+let playergeo = new THREE.BoxGeometry(3,3,3)
+let player = new THREE.Mesh(playergeo,debugMaterial)
 scene.add(player)
 
 const light = new THREE.AmbientLight( 0xFFFFFF, 2 ) // This should be 200% gamma? Looks like original game
@@ -66,10 +66,10 @@ player.position.z = SelectedLevel("pos")[2]
 player.rotation.y = SelectedLevel("pos")[3]
 
 let col = SelectedLevel("col")
-var mtlLoader = new MTLLoader( manager )
+let mtlLoader = new MTLLoader( manager )
 mtlLoader.load( SelectedLevel("obj") + "OBJ.mtl", function ( materials ) {
     materials.preload()
-    var objLoader = new OBJLoader( manager ) // use objLoader over objLoader2 for MTL support
+    let objLoader = new OBJLoader( manager ) // use objLoader over objLoader2 for MTL support
     objLoader.setMaterials( materials )
     objLoader.load( SelectedLevel("obj") + "OBJ.obj", function ( levelobj ) {
         levelobj.scale.set(0.01,0.01,0.01)
@@ -115,7 +115,7 @@ kd.S.down(function(){move("move",spd/2)})
 kd.D.down(function(){move("rotate",-spd/2)})
 kd.E.down(function(){move("lookup",spd/2)})
 
-var bgm = new Audio('./assets/sfx/' + SelectedLevel("sfx") + '.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
+let bgm = new Audio('./assets/sfx/' + SelectedLevel("sfx") + '.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
     this.currentTime = 0
     this.play()
