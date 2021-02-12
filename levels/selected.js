@@ -4,6 +4,7 @@ import {OPT_entry_2} from "./2/OPT/script.js"
 import {GB_entry_2} from "./2/GB/script.js"
 import {MAPY_entry_2} from "./2/MAPY/script.js"
 import {CQ_entry_2} from "./2/CQ/script.js"
+import {LOB_entry_2} from "./2/LOB/script.js"
 
 const selected = prompt("Enter level (e.g. \"FRO1\")")
 
@@ -27,6 +28,10 @@ switch(selected) {
     case "CQ2":
         var selected_level_entry = CQ_entry_2
         console.warn("WARN: music not implemented")
+        console.warn("WARN: collision not implemented")
+        break
+    case "LOB2": 
+        var selected_level_entry = LOB_entry_2
         console.warn("WARN: collision not implemented")
         break
     default:
