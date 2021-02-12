@@ -3,6 +3,7 @@ import {OPT_entry_1} from "./1/OPT/script.js"
 import {OPT_entry_2} from "./2/OPT/script.js"
 import {GB_entry_2} from "./2/GB/script.js"
 import {MAPY_entry_2} from "./2/MAPY/script.js"
+import {CQ_entry_2} from "./2/CQ/script.js"
 
 const selected = prompt("Enter level (e.g. \"FRO1\")")
 
@@ -21,6 +22,9 @@ switch(selected) {
         break
     case "MAPY2":
         var selected_level_entry = MAPY_entry_2
+        break
+    case "CQ2":
+        var selected_level_entry = CQ_entry_2
         break
     default:
         console.error("unimplemented level \"" + selected + "\", defaulting FRO1")
