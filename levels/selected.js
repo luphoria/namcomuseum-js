@@ -22,10 +22,12 @@ switch(selected) {
         break
     case "MAPY2":
         var selected_level_entry = MAPY_entry_2
+        console.warn("WARN: collision not implemented")
         break
     case "CQ2":
         var selected_level_entry = CQ_entry_2
         console.warn("WARN: music not implemented")
+        console.warn("WARN: collision not implemented")
         break
     default:
         console.error("unimplemented level \"" + selected + "\", defaulting FRO1")
