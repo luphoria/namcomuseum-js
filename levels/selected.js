@@ -6,39 +6,38 @@ import {MAPY_entry_2} from "./2/MAPY/script.js"
 import {CQ_entry_2} from "./2/CQ/script.js"
 import {LOB_entry_2} from "./2/LOB/script.js"
 
-const selected = prompt("Enter level (e.g. \"FRO1\")")
+function setEntry() {
+    var selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels")
 
-switch(selected) {
-    case "FRO1":
-        var selected_level_entry = FRO_entry_1
-        break
+    switch(selected) {
+    case "list":
+        alert("FRO1,OPT1,OPT2,GB2,MAPY2,CQ2,LOB2")
+        return setEntry()
+    case "FRO1": 
+        return FRO_entry_1
     case "OPT1":
-        var selected_level_entry = OPT_entry_1
-        break
+        return OPT_entry_1
     case "OPT2":
-        var selected_level_entry = OPT_entry_2
-        break
+        return OPT_entry_2
     case "GB2":
-        var selected_level_entry = GB_entry_2
-        break
+        return GB_entry_2
     case "MAPY2":
-        var selected_level_entry = MAPY_entry_2
         console.warn("WARN: collision not implemented")
-        break
+        return MAPY_entry_2
     case "CQ2":
-        var selected_level_entry = CQ_entry_2
         console.warn("WARN: music not implemented")
         console.warn("WARN: collision not implemented")
-        break
+        return CQ_entry_2
     case "LOB2": 
-        var selected_level_entry = LOB_entry_2
         console.warn("WARN: collision not implemented")
-        break
+        return LOB_entry_2
     default:
         console.error("unimplemented level \"" + selected + "\", defaulting FRO1")
-        var selected_level_entry = FRO_entry_1
-        break
+        return FRO_entry_1
+    }
 }
+
+var selected_level_entry = setEntry()
 
 export const SelectedLevel = (request) => {
     switch(request) {
