@@ -10,7 +10,7 @@ function setEntry() {
     let selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels").toUpperCase()
 
     switch(selected) {
-    case "list":
+    case "LIST":
         alert("FRO1,OPT1,OPT2,GB2,MAPY2,CQ2,LOB2")
         return setEntry()
     case "FRO1": 
