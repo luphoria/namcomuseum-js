@@ -32,6 +32,7 @@ function setEntry() {
         console.warn("WARN: collision not implemented")
         return LOB_entry_2
     default:
+        alert("That level \"" + selected + "\" doesn't exist!\nDefaulting FRO1")
         console.error("unimplemented level \"" + selected + "\", defaulting FRO1")
         return FRO_entry_1
     }
