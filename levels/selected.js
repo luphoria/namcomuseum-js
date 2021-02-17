@@ -7,7 +7,7 @@ import {CQ_entry_2} from "./2/CQ/script.js"
 import {LOB_entry_2} from "./2/LOB/script.js"
 
 function setEntry() {
-    let selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels")
+    let selected = prompt("Enter level (e.g. \"FRO1\")\nenter \"list\" for all levels").toUpperCase()
 
     switch(selected) {
     case "list":
