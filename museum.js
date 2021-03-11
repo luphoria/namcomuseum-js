@@ -83,13 +83,13 @@ function move(type,speed) {
             if(kd.Q.isDown()) speed *= 1.7
             player.getWorldDirection(dir)
             // Could applyScaledVector, however splitting X and Z application allows for collision detection to "slide" you down walls.
-            player.position.x += dir.x * speed
-            if(!collisionCheck()) player.position.x -= dir.x * speed
-            player.position.z += dir.z * speed
-            if(!collisionCheck()) player.position.z -= dir.z * speed
+            player.position.x += dir.x * (speed/2)
+            if(!collisionCheck()) player.position.x -= dir.x * (speed/2)
+            player.position.z += dir.z * (speed/2)
+            if(!collisionCheck()) player.position.z -= dir.z * (speed/2)
             break
         case "rotate":
-            player.rotation.y += speed/27
+            player.rotation.y += speed/54
             break
         case "lookup":
             /*
@@ -100,7 +100,7 @@ function move(type,speed) {
                 - Use three.js built in rotation functions. These will definitely be a learning curve.
             */
             camera.getWorldDirection(dir)
-            player.rotation.x += speed / 50
+            player.rotation.x += speed / 100
             if(player.rotation.x > 0.6) player.rotation.x = 0.6 // lock lookup like in original game
             break
         default: // fallback
@@ -109,11 +109,11 @@ function move(type,speed) {
 }
 
 // key input checks
-kd.W.down(function(){move("move",-spd/2)})
-kd.A.down(function(){move("rotate",spd/2)})
-kd.S.down(function(){move("move",spd/2)})
-kd.D.down(function(){move("rotate",-spd/2)})
-kd.E.down(function(){move("lookup",spd/2)})
+kd.W.down(function(){move("move",-spd)})
+kd.A.down(function(){move("rotate",spd)})
+kd.S.down(function(){move("move",spd)})
+kd.D.down(function(){move("rotate",-spd)})
+kd.E.down(function(){move("lookup",spd)})
 
 let bgm = new Audio('./assets/sfx/' + SelectedLevel("sfx") + '.mp3') // reference museum.mp3 -- TODO make this dynamic and changeable per room
 bgm.addEventListener('ended', function() { // Thanks @kingjeffrey on stackoverflow for FF loop support!
